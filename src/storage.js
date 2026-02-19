@@ -4,17 +4,32 @@ const TRAINEE_DATA_FILE_PATH = './data/trainees.json';
 const COURSE_DATA_FILE_PATH = './data/courses.json';
 
 export function loadTraineeData() {
-  // Use the fs module to read the trainees.json file and return the data as a JavaScript object  
+  const fileContent = fs.readFileSync(TRAINEE_DATA_FILE_PATH, 'utf-8');
+  return JSON.parse(fileContent);
 }
-
-export function saveTraineeData() {
-  // Use the fs module to write the updated trainee data back to the trainees.json file 
+/* 
+For future reference: (+ remainder to delete this later)
+JSON.parse will convert the JSON string into a JavaScript.
+ */
+export function saveTraineeData(updatedTrainees) {
+  const traineeSavedData = JSON.stringify(updatedTrainees, null, 2);
+  fs.writeFileSync(TRAINEE_DATA_FILE_PATH, traineeSavedData, 'utf-8');
 }
-
+/*
+i used the name (updatedTrainees) only for the sake of clarity
+also a remainder to delete this later.
+*/
 export function loadCourseData() {
-  // TODO: Implement
+  const fileContent = fs.readFileSync(COURSE_DATA_FILE_PATH, 'utf-8');
+  return JSON.parse(fileContent);
 }
 
-export function saveCourseData() {
-  // TODO: Implement
+export function saveCourseData(updatedCourses) {
+  const courseSavedData = JSON.stringify(updatedCourses, null, 2);
+  fs.writeFileSync(COURSE_DATA_FILE_PATH, courseSavedData, 'utf-8');
 }
+/*
+ i applied the same logic for the course data as well
+and used the name (updatedCourses) only for the sake of clarity
+( for the future reference, i will delete this later. )
+*/
