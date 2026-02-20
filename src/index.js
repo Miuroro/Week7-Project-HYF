@@ -16,7 +16,6 @@ export function generateHTML(courses) {
     `
     )
     .join('');
-
   return `
     <!DOCTYPE html>
     <html>

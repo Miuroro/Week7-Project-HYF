@@ -5,7 +5,6 @@ export function parseCommand(userInput) {
     if (!userInput || typeof userInput !== 'string') {
       return { command: null, subcommand: null, args: [] };
     }
-
     const parts = userInput.trim().split(/\s+/);
     return {
       command: parts[0],

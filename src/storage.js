@@ -19,7 +19,6 @@ export function loadCourseData() {
   const load = fs.readFileSync(COURSE_DATA_FILE_PATH, 'utf8');
   return JSON.parse(load);
 }
-
 export function saveCourseData(data) {
   // TODO: Implement
   fs.writeFileSync(COURSE_DATA_FILE_PATH, JSON.stringify(data, null, 2));

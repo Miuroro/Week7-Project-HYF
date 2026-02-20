@@ -24,7 +24,6 @@ function addCourse(args) {
     startDate: startDate,
     participants: [],
   };
-
   courses.push(newCourse);
   saveCourseData(courses);
 
