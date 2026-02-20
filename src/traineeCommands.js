@@ -3,7 +3,7 @@ import { saveTraineeData, loadTraineeData } from './storage.js';
 function addTrainee(firstName, lastName) {
   const trainees = loadTraineeData();
   // Generate a unique ID for the new trainee
-  const newId = Math.floor(Math.random() * 100000);
+  const newId = Math.floor(Math.random() * 100000); // 0 to 99999
 
   const newTrainee = {
     id: newId,
@@ -16,8 +16,12 @@ function addTrainee(firstName, lastName) {
   console.log(`TRAINEE ADD ${firstName} ${lastName}`);
 }
 
-function updateTrainee(updatedTrainee) {}
-function deleteTrainee() {}
+function updateTrainee() {
+  // TODO: Implement the logic
+}
+function deleteTrainee() {
+  // TODO: Implement the logic
+}
 
 function fetchTrainee() {
   // TODO: Implement the logic
