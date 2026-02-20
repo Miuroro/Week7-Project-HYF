@@ -1,3 +1,21 @@
-export function parseCommand(userInput) {
-  // TODO: Implement the logic to parse the user input and return an object with the command, subcommand, and arguments
+import promptSync from 'prompt-sync';
+const prompt = promptSync();
+
+export function parseCommand() {
+  const firstName = prompt('Enter first name: ');
+  const lastName = prompt('Enter last name: ');
+
+  if (typeof firstName !== 'string' || typeof lastName !== 'string') {
+    return null;
+  }
+
+  const command = 'trainee';
+  const subcommand = 'add';
+  const args = [firstName, lastName];
+
+  return {
+    command,
+    subcommand,
+    args,
+  };
 }
