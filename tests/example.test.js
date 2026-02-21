@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+import { addTrainee } from '../src/traineeCommands.js';
 
 describe('Example Test', () => {
   test('adds 1 + 2 to equal 3', () => {

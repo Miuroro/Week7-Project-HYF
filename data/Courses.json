@@ -3,7 +3,10 @@
     "id": 87421,
     "name": "Intro to JavaScript Course",
     "startDate": "20226-02-01",
-    "participants": [12345, 12346]
+    "participants": [
+      12345,
+      12346
+    ]
   },
   {
     "id": 87422,
@@ -39,6 +42,12 @@
     "id": 87427,
     "name": "Testing and Debugging Course",
     "startDate": "2026-05-15",
+    "participants": []
+  },
+  {
+    "id": 33939,
+    "name": "cooking",
+    "startDate": "1993-05-16",
     "participants": []
   }
 ]

@@ -1,35 +1,26 @@
 import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
-const TRAINEE_DATA_FILE_PATH = '../data/trainees.json';
-const COURSE_DATA_FILE_PATH = '../data/Courses.json';
+const TRAINEE_DATA_FILE_PATH = fileURLToPath(
+  new URL('../data/trainees.json', import.meta.url)
+);
+const COURSE_DATA_FILE_PATH = fileURLToPath(
+  new URL('../data/courses.json', import.meta.url)
+);
 
 export function loadTraineeData() {
-  const fileContent = fs.readFileSync(TRAINEE_DATA_FILE_PATH, 'utf-8');
-  return JSON.parse(fileContent);
-}
-/* 
-For future reference: (+ remainder to delete this later)
-JSON.parse will convert the JSON string into a JavaScript.
- */
-export function saveTraineeData(updatedTrainees) {
-  const traineeSavedData = JSON.stringify(updatedTrainees, null, 2);
-  fs.writeFileSync(TRAINEE_DATA_FILE_PATH, traineeSavedData, 'utf-8');
-}
-/*
-i used the name (updatedTrainees) only for the sake of clarity
-also a remainder to delete this later.
-*/
-export function loadCourseData() {
-  const fileContent = fs.readFileSync(COURSE_DATA_FILE_PATH, 'utf-8');
-  return JSON.parse(fileContent);
+  const load = fs.readFileSync(TRAINEE_DATA_FILE_PATH, 'utf8');
+  return JSON.parse(load);
 }
 
-export function saveCourseData(updatedCourses) {
-  const courseSavedData = JSON.stringify(updatedCourses, null, 2);
-  fs.writeFileSync(COURSE_DATA_FILE_PATH, courseSavedData, 'utf-8');
+export function saveTraineeData(data) {
+  fs.writeFileSync(TRAINEE_DATA_FILE_PATH, JSON.stringify(data, null, 2));
 }
-/*
- i applied the same logic for the course data as well
-and used the name (updatedCourses) only for the sake of clarity
-( for the future reference, i will delete this later. )
-*/
+
+export function loadCourseData() {
+  const load = fs.readFileSync(COURSE_DATA_FILE_PATH, 'utf8');
+  return JSON.parse(load);
+}
+export function saveCourseData(data) {
+  fs.writeFileSync(COURSE_DATA_FILE_PATH, JSON.stringify(data, null, 2));
+}
