@@ -7,5 +7,47 @@
       12345,
       12346
     ]
+  },
+  {
+    "id": 87422,
+    "name": "Advanced JavaScript Course",
+    "startDate": "2026-03-01",
+    "participants": []
+  },
+  {
+    "id": 87423,
+    "name": "Node.js Fundamentals Course",
+    "startDate": "2026-03-15",
+    "participants": []
+  },
+  {
+    "id": 87424,
+    "name": "Code Philosophical Principles",
+    "startDate": "2026-04-01",
+    "participants": []
+  },
+  {
+    "id": 87425,
+    "name": "Database Essentials Course",
+    "startDate": "2026-04-15",
+    "participants": []
+  },
+  {
+    "id": 87426,
+    "name": "API Development Course",
+    "startDate": "2026-05-01",
+    "participants": []
+  },
+  {
+    "id": 87427,
+    "name": "Testing and Debugging Course",
+    "startDate": "2026-05-15",
+    "participants": []
+  },
+  {
+    "id": 33939,
+    "name": "cooking",
+    "startDate": "1993-05-16",
+    "participants": []
   }
 ]
