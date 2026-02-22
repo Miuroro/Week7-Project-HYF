@@ -4,6 +4,7 @@ import { handleTraineeCommand } from './traineeCommands.js';
 import promptSync from 'prompt-sync';
 import chalk from 'chalk';
 
+// Initialize prompt-sync for user input
 const prompt = promptSync();
 
 console.log(chalk.gray('Tip: type quit, q, or press Ctrl + C to exit.'));
