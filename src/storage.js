@@ -1,26 +1,20 @@
 import fs from 'node:fs';
-import { fileURLToPath } from 'node:url';
 
-const TRAINEE_DATA_FILE_PATH = fileURLToPath(
-  new URL('../data/trainees.json', import.meta.url)
-);
-const COURSE_DATA_FILE_PATH = fileURLToPath(
-  new URL('../data/courses.json', import.meta.url)
-);
+const TRAINEE_DATA_FILE_PATH = './data/trainees.json';
+const COURSE_DATA_FILE_PATH = './data/courses.json';
 
 export function loadTraineeData() {
-  const load = fs.readFileSync(TRAINEE_DATA_FILE_PATH, 'utf8');
-  return JSON.parse(load);
+  // Use the fs module to read the trainees.json file and return the data as a JavaScript object  
 }
 
-export function saveTraineeData(data) {
-  fs.writeFileSync(TRAINEE_DATA_FILE_PATH, JSON.stringify(data, null, 2));
+export function saveTraineeData() {
+  // Use the fs module to write the updated trainee data back to the trainees.json file 
 }
 
 export function loadCourseData() {
-  const load = fs.readFileSync(COURSE_DATA_FILE_PATH, 'utf8');
-  return JSON.parse(load);
+  // TODO: Implement
 }
-export function saveCourseData(data) {
-  fs.writeFileSync(COURSE_DATA_FILE_PATH, JSON.stringify(data, null, 2));
+
+export function saveCourseData() {
+  // TODO: Implement
 }

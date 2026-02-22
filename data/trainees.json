@@ -8,30 +8,5 @@
     "id": 12346,
     "firstName": "Jane",
     "lastName": "Smith"
-  },
-  {
-    "id": 12347,
-    "firstName": "Alice",
-    "lastName": "Johnson"
-  },
-  {
-    "id": 12348,
-    "firstName": "Bob",
-    "lastName": "Williams"
-  },
-  {
-    "id": 12349,
-    "firstName": "Carol",
-    "lastName": "Brown"
-  },
-  {
-    "id": 12350,
-    "firstName": "David",
-    "lastName": "Jones"
-  },
-  {
-    "id": 61183,
-    "firstName": "sun",
-    "lastName": "moon"
   }
 ]

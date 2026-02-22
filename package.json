@@ -21,9 +21,5 @@
   "devDependencies": {
     "prettier": "^3.8.1",
     "vitest": "^4.0.18"
-  },
-  "dependencies": {
-    "chalk": "^4.1.2",
-    "prompt-sync": "^4.2.0"
   }
 }
