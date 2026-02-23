@@ -4,7 +4,7 @@ const TRAINEE_DATA_FILE_PATH = './data/trainees.json';
 const COURSE_DATA_FILE_PATH = './data/courses.json';
 
 export function loadTraineeData() {
-  const load = fs.readFileSync(TRAINEE_DATA_FILE_PATH, 'utf-8');
+  const load = fs.readFileSync(TRAINEE_DATA_FILE_PATH, 'utf8');
   return JSON.parse(load);
 }
 
