@@ -4,7 +4,7 @@ export function parseCommand(userInput) {
     return { command: null, subcommand: null, args: [] };
   }
 
-  const parts = userInput.trim().split(/\n/);
+  const parts = userInput.trim().split(/\s+/);
 
   return {
     command: parts[0]?.toLowerCase() ?? null,
