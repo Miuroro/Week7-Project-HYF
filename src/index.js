@@ -26,7 +26,7 @@ while (true) {
 
     switch (command.command?.toLowerCase()) {
       case 'course':
-        handleCourseCommand(command);
+        handleCourseCommand(command.subcommand, command.args);
         break;
 
       case 'trainee':
