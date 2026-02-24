@@ -275,3 +275,4 @@ export function handleCourseCommand(subcommand, args) {
   }
   console.log(chalk.red('ERROR: Unknown subcommand: '), sub);
 }
+export { joinCourse };
