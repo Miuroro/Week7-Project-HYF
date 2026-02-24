@@ -21,8 +21,11 @@ export function addTrainee(firstName, lastName) {
   }
 
   const trainees = loadTraineeData();
-  // generate random ID for the new trainee
-  const newId = Math.floor(Math.random() * 100000);
+  // keeps generating new id between 0 and 99999 until ID is unique in existing trainees.
+  let newId = Math.floor(Math.random() * 100000);
+  while (trainees.some((trainee) => trainee.id === newId)) {
+    newId = Math.floor(Math.random() * 100000);
+  }
 
   const newTrainee = {
     id: newId,
@@ -32,10 +35,10 @@ export function addTrainee(firstName, lastName) {
 
   trainees.push(newTrainee);
   saveTraineeData(trainees);
-  return `CREATED: ${newId},${trimmedFirstName} ${trimmedLastName}`;
+  return `CREATED: ${newId} ${trimmedFirstName} ${trimmedLastName}`;
 }
 
-function updateTrainee(id, firstName, lastName) {
+export function updateTrainee(id, firstName, lastName) {
   // trim first name and last name to reject empty strings with only spaces
   const trimmedFirstName = firstName?.trim();
   const trimmedLastName = lastName?.trim();
@@ -86,7 +89,7 @@ function updateTrainee(id, firstName, lastName) {
   return `UPDATED: ${numericId} ${trimmedFirstName} ${trimmedLastName}`;
 }
 
-function deleteTrainee(id) {
+export function deleteTrainee(id) {
   const trainees = loadTraineeData();
   const numericId = Number(id);
   const invalidIdError = chalk.red(
@@ -119,7 +122,7 @@ function deleteTrainee(id) {
   return true;
 }
 
-function fetchTrainee(id) {
+export function fetchTrainee(id) {
   const numericId = Number(id);
   // check if id is provided and is a number
   if (Number.isNaN(numericId)) {
@@ -154,7 +157,7 @@ function fetchTrainee(id) {
   return true;
 }
 
-function fetchAllTrainees() {
+export function fetchAllTrainees() {
   const trainees = loadTraineeData();
   // sort trainees by last name, then by first name
   const sortedTrainees = [...trainees].sort((left, right) => {
@@ -178,7 +181,7 @@ function fetchAllTrainees() {
 }
 
 // Bonus commands : trainee search.
-function getTraineeQuery(query) {
+export function getTraineeQuery(query) {
   const normalizedQuery = query?.trim().toLowerCase();
 
   if (!normalizedQuery) {
