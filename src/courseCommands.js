@@ -16,7 +16,7 @@ function addCourse(args) {
   if (!dataRegex.test(startDate)) {
     return chalk.red('ERROR: Invalid start date. Must be in yyyy-MM-dd format');
   }
-
+  //GENERATING A RANDOM ID FOR THE NEW COURSE
   const courses = loadCourseData();
   const newId = Math.floor(Math.random() * 100000);
 
@@ -83,7 +83,7 @@ function deleteCourse() {
   }
 
   const courseIndex = courses.findIndex((course) => course.id === numericId);
-
+  //CHECKING IF THE COURSE ID EXISTS IN THE SYSTEM BEFORE DELETING IT
   if (courseIndex === -1) {
     return chalk.red(`ERROR: Course with ID ${id} does not exist`);
   }
@@ -141,7 +141,7 @@ function joinCourse() {
       'ERROR: A trainee is not allowed to join more than 5 courses.'
     );
   }
-
+  //ADDING THE TRAINEE TO THE COURSE PARTICIPANTS AND SAVING THE DATA
   participants.push(numericTraineeId);
   saveCourseData(courses);
 
