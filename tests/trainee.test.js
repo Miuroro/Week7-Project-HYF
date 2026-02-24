@@ -8,14 +8,7 @@ import {
 
 import { loadTraineeData, saveTraineeData } from '../src/storage.js';
 
-/* To do a safe test i added this function withOriginalData(run)
- It Saves the original trainees data before a test and restores it after the test finishes.
-
- example:
- The test for adding a trainee will add a trainee to the data,
- but after the test finishes, the original data will be restored,
- so the added trainee will be removed and the data will be back to its original state.
- */
+// This function is used to save the original data before a test and restore it after the test finishes.
 function withOriginalData(run) {
   const original = loadTraineeData();
   try {
