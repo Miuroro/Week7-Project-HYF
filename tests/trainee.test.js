@@ -33,7 +33,7 @@ describe('Testing Trainee Commands', () => {
       const result = addTrainee('Monera', 'Test');
       const after = loadTraineeData();
 
-      expect(result).toMatch(/CREATED: \d+,Monera Test/);
+      expect(result).toMatch(/CREATED: \d+ Monera Test/);
       expect(after.length).toBe(before + 1);
     });
   });
@@ -50,7 +50,7 @@ describe('Testing Trainee Commands', () => {
   test('gets a trainee by id', () => {
     withOriginalData(() => {
       const created = addTrainee('Fetch', 'User');
-      const id = created.match(/CREATED: (\d+),/)?.[1];
+      const id = created.match(/CREATED: (\d+)/)?.[1];
 
       const result = fetchTrainee(id);
 
@@ -65,5 +65,3 @@ describe('Testing Trainee Commands', () => {
     });
   });
 });
-
-// Run(  npm test -- --run tests/triainee.test.js   ) to run this test file.
