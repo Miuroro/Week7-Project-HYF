@@ -5,7 +5,11 @@ import promptSync from 'prompt-sync';
 import chalk from 'chalk';
 
 // Initialize prompt-sync for user input
-const prompt = promptSync();
+const prompt = promptSync({ sigint: true });
+
+process.on('SIGINT', () => {
+  process.exit(0);
+});
 
 console.log(chalk.gray('Tip: type quit, q, or press Ctrl + C to exit.'));
 
