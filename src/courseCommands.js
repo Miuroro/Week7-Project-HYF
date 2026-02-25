@@ -12,6 +12,7 @@ function addCourse(args) {
   }
 
   const dataRegex = /^\d{4}-\d{2}-\d{2}$/;
+
   if (!dataRegex.test(startDate)) {
     return chalk.red('ERROR: Invalid start date. Must be in yyyy-MM-dd format');
   }
