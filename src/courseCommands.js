@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import { saveCourseData, loadCourseData, loadTraineeData } from './storage.js';
 
-// registering new course function start here
+// Add course
 function addCourse(args) {
   const commandArgs = Array.isArray(args) ? args : [];
   const startDate = commandArgs[commandArgs.length - 1];
@@ -11,8 +11,8 @@ function addCourse(args) {
     return chalk.red('ERROR: Must provide name and start date');
   }
 
-  //cheking the date format input is correct or not
   const dataRegex = /^\d{4}-\d{2}-\d{2}$/;
+
   if (!dataRegex.test(startDate)) {
     return chalk.red('ERROR: Invalid start date. Must be in yyyy-MM-dd format');
   }
@@ -24,15 +24,16 @@ function addCourse(args) {
     id: newId,
     name: name,
     startDate: startDate,
-    participants: [], //we initialize here the participants list
+    participants: [],
   };
+
   courses.push(newCourse);
-  saveCourseData(courses); //saving a new course into file
+  saveCourseData(courses);
 
   return `CREATED: ${newId} ${name} ${startDate}`;
 }
 
-// update course command starts here
+// Update Courses
 function updateCourse() {
   const args = arguments[0];
   const commandArgs = Array.isArray(args) ? args : [];
@@ -40,7 +41,6 @@ function updateCourse() {
   const startDate = commandArgs[commandArgs.length - 1];
   const name = commandArgs.slice(1, -1).join(' ').trim();
 
-  // we check here if the input is correct or not
   if (!id || !name || !startDate) {
     return chalk.red('ERROR: Must provide ID, name and start date.');
   }
@@ -49,7 +49,6 @@ function updateCourse() {
   const courses = loadCourseData();
   const courseIndex = courses.findIndex((course) => course.id === numericId);
 
-  //checking here if the course is exist
   if (Number.isNaN(numericId) || courseIndex === -1) {
     return chalk.red(`ERROR: Course with ID ${id} does not exist`);
   }
@@ -66,7 +65,6 @@ function updateCourse() {
     return chalk.red('ERROR: Invalid start date. Must be in yyyy-MM-dd format');
   }
 
-  // we update the course and save
   courses[courseIndex].name = name;
   courses[courseIndex].startDate = startDate;
   saveCourseData(courses);
@@ -74,7 +72,7 @@ function updateCourse() {
   return `UPDATED: ${numericId} ${name} ${startDate}`;
 }
 
-//delete course command starts here
+//delete course starts here
 function deleteCourse() {
   const args = arguments[0];
   const commandArgs = Array.isArray(args) ? args : [];
@@ -82,30 +80,27 @@ function deleteCourse() {
   const numericId = Number(id);
   const courses = loadCourseData();
 
-  //checking if the course id is correct
   if (!id || Number.isNaN(numericId)) {
     return chalk.red(`ERROR: Course with ID ${id} does not exist`);
   }
 
   const courseIndex = courses.findIndex((course) => course.id === numericId);
 
-  //checking the course if it is in the array if not exist then error
   if (courseIndex === -1) {
     return chalk.red(`ERROR: Course with ID ${id} does not exist`);
   }
 
   const deletedCourse = courses[courseIndex];
-  courses.splice(courseIndex, 1); // remove the courses from the  lists
+  courses.splice(courseIndex, 1);
   saveCourseData(courses);
 
   return `DELETED: ${deletedCourse.id} ${deletedCourse.name}`;
 }
 
-//join course command starts here
+//join course starts here
 function joinCourse() {
   const [courseId, traineeId] = Array.isArray(arguments[0]) ? arguments[0] : [];
 
-  //check for correct input
   if (!courseId || !traineeId) {
     return chalk.red('ERROR: Must provide course ID and trainee ID');
   }
@@ -115,7 +110,6 @@ function joinCourse() {
   const courses = loadCourseData();
   const trainees = loadTraineeData();
 
-  //checking if the course and the trainee is exist
   const course = courses.find((item) => item.id === numericCourseId);
   if (Number.isNaN(numericCourseId) || !course) {
     return chalk.red(`ERROR: Course with ID ${courseId} does not exist`);
@@ -128,6 +122,7 @@ function joinCourse() {
   const participants = Array.isArray(course.participants)
     ? course.participants
     : (course.participants = []);
+
   //if the trainee has already join the course return error here
   if (participants.includes(numericTraineeId)) {
     return chalk.red('ERROR: The Trainee has already joined this course');
@@ -156,7 +151,8 @@ function joinCourse() {
 
   return `${trainee.firstName} ${trainee.lastName} Joined ${course.name}`;
 }
-//leave course commmand starts here
+
+//leave course  starts here
 function leaveCourse() {
   const [courseId, traineeId] = Array.isArray(arguments[0]) ? arguments[0] : [];
 
@@ -175,7 +171,6 @@ function leaveCourse() {
     return chalk.red(`ERROR: Course with ID ${courseId} does not exist`);
   }
 
-  //trainee check to see if the trainee exist in the system
   const trainee = trainees.find((item) => item.id === numericTraineeId);
   if (Number.isNaN(numericTraineeId) || !trainee) {
     return chalk.red(`ERROR: Trainee with ID ${traineeId} does not exist`);
@@ -185,12 +180,10 @@ function leaveCourse() {
     ? course.participants
     : [];
 
-  //checking if the trainee has joined the course before leaving
   if (!participants.includes(numericTraineeId)) {
     return chalk.red('ERROR: The Trainee did not join the course');
   }
 
-  //removing the trainee from the course participants
   const index = participants.indexOf(numericTraineeId);
   participants.splice(index, 1);
   saveCourseData(courses);
@@ -198,7 +191,7 @@ function leaveCourse() {
   return `${trainee.firstName} ${trainee.lastName} Left ${course.name}`;
 }
 
-//Get courses commands here
+//Get courses here
 function getCourse() {
   const args = arguments[0];
   const commandArgs = Array.isArray(args) ? args : [];
@@ -229,7 +222,7 @@ function getCourse() {
 
   return `${course.id} ${course.name} ${course.startDate}\nParticipants (${participants.length}):${participantLines ? `\n${participantLines}` : ''}`;
 }
-//get all courses command to see all courses in the system
+//get all courses Subcommand startss
 function getAllCourses() {
   const sortedCourses = [...loadCourseData()].sort(
     (left, right) => new Date(left.startDate) - new Date(right.startDate)
@@ -246,7 +239,7 @@ function getAllCourses() {
   return `\n${chalk.green('Courses:')}\n${courseLines}\n\nTotal: ${chalk.green(sortedCourses.length)}\n`;
 }
 
-//exporting main function to handle course commands are here....
+//exporting main function to handle course commands
 export function handleCourseCommand(subcommand, args) {
   const sub = subcommand?.toLowerCase();
   const commandArgs = Array.isArray(args) ? args : [];
@@ -275,4 +268,6 @@ export function handleCourseCommand(subcommand, args) {
   }
   console.log(chalk.red('ERROR: Unknown subcommand: '), sub);
 }
+
+//this export function is only for testing purpose ---> ../tests/course.test.js
 export { joinCourse };
