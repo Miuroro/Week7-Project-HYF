@@ -58,7 +58,7 @@ export function updateTrainee(id, firstName, lastName) {
 
   // check if id is a number
   if (Number.isNaN(numericId)) {
-    console.log(chalk.red(`ERROR: Trainee with ID ${id} does not exist`));
+    console.log(chalk.red(`ERROR: invalid ID must be a number`));
     return false;
   }
 
@@ -77,7 +77,9 @@ export function updateTrainee(id, firstName, lastName) {
   // check if first name and last name contain only letters
   const nameRegex = /^[A-Za-z]+$/;
   if (!nameRegex.test(trimmedFirstName) || !nameRegex.test(trimmedLastName)) {
-    console.log('ERROR: First name and last name must contain only letters');
+    console.log(
+      chalk.red('ERROR: First name and last name must contain only letters')
+    );
     return false;
   }
 
@@ -92,27 +94,24 @@ export function updateTrainee(id, firstName, lastName) {
 export function deleteTrainee(id) {
   const trainees = loadTraineeData();
   const numericId = Number(id);
-  const invalidIdError = chalk.red(
-    `ERROR: Trainee with ID ${id} does not exist`
-  );
 
-  // check if id is provided and is a number
+  // check if id is a number
   if (Number.isNaN(numericId)) {
-    console.log(invalidIdError);
+    console.log(chalk.red(`ERROR: invalid ID must be a number`));
     return false;
   }
 
-  // 1.find the index of the trainee with the given ID
+  // find the index of the trainee with the given ID
   const traineeIndex = trainees.findIndex(
     (trainee) => trainee.id === numericId
   );
 
-  //2. check if trainee with the given ID exists
+  // check if trainee with the given ID exists
   if (traineeIndex === -1) {
-    console.log(invalidIdError);
+    console.log(chalk.red(`ERROR: Trainee with ID ${id} does not exist`));
     return false;
   }
-  // 3. if the trainee is found, we remove the trainee from the array and save the updated array back to the file.
+  // if the trainee is found, remove from the array and save the updated array back to the file.
   const deletedTrainee = trainees[traineeIndex];
   trainees.splice(traineeIndex, 1);
   saveTraineeData(trainees);
@@ -126,7 +125,7 @@ export function fetchTrainee(id) {
   const numericId = Number(id);
   // check if id is provided and is a number
   if (Number.isNaN(numericId)) {
-    console.log(chalk.red(`ERROR: Trainee with ID ${id} does not exist`));
+    console.log(chalk.red(`ERROR: invalid ID must be a number`));
     return false;
   }
   // check if trainee with the given ID exists
@@ -136,7 +135,7 @@ export function fetchTrainee(id) {
     console.log(chalk.red(`ERROR: Trainee with ID ${id} does not exist`));
     return false;
   }
-  // if the trainee is found, we print the trainee's information and the courses they are enrolled in.
+
   const courses = loadCourseData();
   const participantCourses = courses
     .filter(
@@ -191,7 +190,6 @@ export function getTraineeQuery(query) {
 
   const trainees = loadTraineeData();
   const matchedTrainees = trainees.filter(
-    // filter trainees based on whether the query matches either the first name or last name (case-insensitive)
     (trainee) =>
       trainee.firstName.toLowerCase().includes(normalizedQuery) ||
       trainee.lastName.toLowerCase().includes(normalizedQuery)
@@ -211,41 +209,6 @@ export function getTraineeQuery(query) {
 export function handleTraineeCommand(subcommand, args) {
   const sub = subcommand?.toLowerCase();
   const commandArgs = Array.isArray(args) ? args : [];
-
-  if (sub === 'add' && commandArgs.length !== 2) {
-    console.log(
-      chalk.red(
-        'ERROR: Must provide first and last name, no spaces (ex:trainee add John Doe).'
-      )
-    );
-    return;
-  }
-
-  if (sub === 'update' && commandArgs.length !== 3) {
-    console.log(
-      chalk.red(
-        'ERROR: Must provide ID, first name and last name, no spaces (ex:trainee update 12345 John Doe).'
-      )
-    );
-    return;
-  }
-
-  if (sub === 'delete' && commandArgs.length !== 1) {
-    console.log(
-      chalk.red('ERROR: Must provide ID (ex: trainee delete 12345).')
-    );
-    return;
-  }
-
-  if (sub === 'get' && commandArgs.length !== 1) {
-    console.log(chalk.red('ERROR: Must provide ID (ex: trainee get 12345).'));
-    return;
-  }
-
-  if (sub === 'search' && commandArgs.length === 0) {
-    console.log(chalk.red('ERROR: Must provide a query'));
-    return;
-  }
 
   const result =
     sub === 'add'
